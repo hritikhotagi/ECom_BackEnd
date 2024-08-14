@@ -5,8 +5,16 @@ const cors = require('cors');
 const routes = require('./components/routes');
 require('dotenv').config();
 
+// Configure CORS
+const corsOptions = {
+    origin: ['https://e-com-front-end.vercel.app', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json({ limit: '10mb' }));
-app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -20,5 +28,5 @@ app.use('/', routes);
 // Start the server
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
-    console.log("Server running on port 3001");
+    console.log(`Server running on port ${port}`);
 });
