@@ -3,12 +3,13 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./components/routes');
+require('dotenv').config();
 
 app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://hritikhotagi:hritikhotagi@mw.ni3sso0.mongodb.net/?retryWrites=true&w=majority&appName=MW", {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
